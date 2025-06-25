@@ -21,7 +21,7 @@ class TextContextRelevancyEvaluator(BaseEvaluator):
             "text": (
                 f"""
             Evaluasi metrik berikut:\n
-            text_context_relevancy: Apakah konteks yang diberikan oleh teks "{inputs["context"]}" relevan dengan kueri pengguna "{inputs["user_query"]}"? (YES atau NO)\n
+            text_context_relevancy: Apakah konteks yang diberikan oleh teks "{inputs["context"]}" relevan (mengandung informasi yang berkaitan) terhadap pertanyaan "{inputs["user_query"]}"? (YES atau NO)\n
             Jelaskan langkah demi langkah alasan Anda untuk memastikan bahwa kesimpulan yang diambil benar.
             Berikan alasannya dalam bentuk string, bukan berupa list.
             {self.json_parser.get_format_instructions()}
@@ -50,7 +50,7 @@ class ImageContextRelevancyEvaluator(BaseEvaluator):
             "text": (
                 f"""
             Evaluasi metrik berikut:\n
-            image_context_relevancy: Apakah konteks yang diberikan oleh gambar relevan dengan kueri pengguna "{inputs["user_query"]}"? (YES atau NO)\n
+            image_context_relevancy: Apakah konteks yang diberikan oleh gambar relevan (mengandung informasi yang berkaitan) terhadap pertanyaan "{inputs["user_query"]}"? (YES atau NO)\n
             Jelaskan langkah demi langkah alasan Anda untuk memastikan bahwa kesimpulan Anda benar.
             Berikan alasannya dalam bentuk string, bukan berupa list.
             {self.json_parser.get_format_instructions()}
@@ -72,7 +72,7 @@ class AnswerRelevancyEvaluator(BaseEvaluator):
             "text": (
                 f"""
             Evaluasi metrik berikut:\n
-            answer_relevancy: Apakah jawaban "{inputs["generated_answer"]}" relevan dengan kueri pengguna "{inputs["user_query"]}"? (YES atau NO)\n
+            answer_relevancy: Apakah jawaban "{inputs["generated_answer"]}" relevan (mengandung informasi yang berkaitan) terhadap pertanyaan "{inputs["user_query"]}"? (YES atau NO)\n
             Jelaskan langkah demi langkah alasan Anda untuk memastikan bahwa kesimpulan Anda benar.
             Berikan alasannya dalam bentuk string, bukan berupa list.
             {self.json_parser.get_format_instructions()}
@@ -135,7 +135,7 @@ class ImageFaithfulnessEvaluator(BaseEvaluator):
             "text": (
                 f"""
                 Evaluasi metrik berikut:\n
-                image_faithfulness: Apakah jawaban sesuai (faithful) dengan konteks yang diberikan oleh gambar, yaitu apakah jawaban tersebut secara faktual selaras dengan konteks? (YES atau NO)\n
+                image_faithfulness: Apakah jawaban sesuai (faithful) dengan konteks yang diberikan oleh gambar, dalam artian apakah jawaban tersebut secara faktual selaras dengan konteks? (YES atau NO)\n
                 JAWABAN: "{inputs["generated_answer"]}"\n\
                 Jelaskan langkah demi langkah alasan Anda untuk memastikan bahwa kesimpulan Anda benar.
                 Berikan alasannya dalam bentuk string, bukan berupa list.
@@ -162,7 +162,7 @@ class TextFaithfulnessEvaluator(BaseEvaluator):
             "text": (
                 f"""
                 Evaluasi metrik berikut:\n
-                text_faithfulness: Apakah jawaban sesuai (faithful) dengan konteks yang diberikan oleh teks, yaitu apakah jawaban tersebut secara faktual selaras dengan konteks? (YES atau NO)\n
+                text_faithfulness: Apakah jawaban sesuai (faithful) dengan konteks yang diberikan oleh teks, dalam artian apakah jawaban tersebut secara faktual selaras dengan konteks? (YES atau NO)\n
                 JAWABAN: "{inputs["generated_answer"]}"\n\
                 TEXT: "{inputs["context"]}"\n\
                 Jelaskan langkah demi langkah alasan Anda untuk memastikan bahwa kesimpulan Anda benar.
