@@ -1,0 +1,19 @@
+Lib/
+Include/
+pyvenv.cfg
+Scripts/
+data/
+knowledge_base/
+share/
+
+# Cache & sistem
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+.DS_Store
+.env
+
+# VSCode
+.vscode/
