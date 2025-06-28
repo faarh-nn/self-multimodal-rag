@@ -16,7 +16,7 @@ import openai
 
 
 class SelfMultimodalRAGChain:
-    def __init__(self, model, retriever, reference_qa_path=None):
+    def __init__(self, model, retriever):
         """
         Self-RAG enhanced Multimodal RAG chain
         
@@ -25,7 +25,6 @@ class SelfMultimodalRAGChain:
         """
         self.model = model
         self.retriever = retriever
-        self.df = pd.read_excel(reference_qa_path) if reference_qa_path else None
 
         # Initialize graders
         self.init_graders()

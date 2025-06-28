@@ -12,6 +12,9 @@ EMBEDDING_MODEL_TYPE = "text-embedding-3-small"
 # excel file containing questions and reference answers
 REFERENCE_QA = r"data/reference_qa.xlsx"
 
+# directory containing input images from user for question answering
+USER_IMAGES_DIR = r"data/image_for_question" 
+
 # directory containing the pdf files from which to extract texts and images
 MANUALS_DIR = r"knowledge_base"
 

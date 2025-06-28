@@ -5,7 +5,6 @@ from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import StrOutputParser 
 from langchain_core.runnables import RunnableLambda, RunnablePassthrough 
 from src.utils.base64_utils.base64_utils import *
-from src.rag_env import REFERENCE_QA
 import pandas as pd
 from typing import List
 import traceback
@@ -31,7 +30,6 @@ class MultimodalRAGChain:
         self.model = model
         self.retriever = retriever
         self.tokenizer = None
-        self.df = pd.read_excel(REFERENCE_QA)
         
         self.chain = (
                 {

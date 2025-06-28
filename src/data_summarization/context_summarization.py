@@ -9,7 +9,6 @@ from src.utils.base64_utils.base64_utils import *
 from src.rag_env import INPUT_TEXT_DATA, INPUT_IMG_DATA,IMG_SUMMARIES_CACHE_DIR, TEXT_SUMMARIES_CACHE_DIR
 
 
-
 class TextSummarizer:
     """  
     A class to summarize texts using OpenAI's models via direct API.
@@ -46,8 +45,6 @@ class TextSummarizer:
             # Initialize DataFrame if it doesn't exist
             self.df = pd.DataFrame(columns=['text', 'text_summary'])
             self.df.to_csv(self.cache_file, index=False)
-    
-    
     
     def summarize(self, texts: List[str]) -> List[str]:
         """  
@@ -101,7 +98,6 @@ class TextSummarizer:
                 self.df.to_csv(self.cache_file, index=False)
   
         return self.df['text_summary'].tolist()
-    
 
     @staticmethod
     def exponential_backoff_retry(func, *args, **kwargs):
@@ -109,7 +105,7 @@ class TextSummarizer:
         Fungsi wrapper untuk menangani rate limit dengan exponential backoff.
         Akan mencoba ulang `func()` hingga `max_retries` kali jika terjadi `RateLimitError`.
         """
-        max_retries=5
+        max_retries=10
         for attempt in range(max_retries):
             try:
                 return func(*args, **kwargs)  
@@ -126,8 +122,7 @@ class TextSummarizer:
                 time.sleep(wait_time)
         
         print("Max retries reached. Giving up.")
-        return None
-        
+        return None 
 
 class ImageSummarizer:
     """
@@ -144,7 +139,6 @@ class ImageSummarizer:
         """
         self.model = model
         self.tokenizer=tokenizer
-    
     
     def summarize(self, image_bytes_list: List[bytes], cache_path: str) -> Tuple[List[str], List[str]]:
         """  
@@ -203,7 +197,6 @@ class ImageSummarizer:
                     f.write(f"Failed to summarize img {i}\n")
                 continue  # Lanjutkan ke gambar berikutnya jika tetap gagal
 
-
             # Update DataFrame with new summary
             df.at[i, 'image_summary'] = summary_content
 
@@ -211,10 +204,9 @@ class ImageSummarizer:
             df.to_csv(cache_file, index=False)
 
         return img_base64_list, df['image_summary'].tolist()
-    
 
     @staticmethod
-    def exponential_backoff_retry(func, max_retries=5):
+    def exponential_backoff_retry(func, max_retries=10):
         """
         Fungsi wrapper untuk menangani rate limit dengan exponential backoff.
         Akan mencoba ulang `func()` hingga `max_retries` kali jika terjadi `RateLimitError`.
@@ -235,8 +227,7 @@ class ImageSummarizer:
                 time.sleep(wait_time)
         
         print("Max retries reached. Giving up.")
-        return None
-        
+        return None 
         
     def summarize_image_openai(self, img_base64: str, prompt: str) -> str:
         """
@@ -261,7 +252,6 @@ class ImageSummarizer:
         )
         print(msg.content)
         return msg.content
-
 
 if __name__ == "__main__":
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
