@@ -74,7 +74,7 @@ def run_pipeline_with_summaries_single(qa_model, embedding_model, vectorstore_pa
         print("Warning: 'gambar_id' column not found. All queries will be processed without user images.")
         df['gambar_id'] = None
     
-    output_file = os.path.join(output_dir, f"rag_output_{qa_model}_multimodal_rag_summaries_single.json")
+    output_file = os.path.join(output_dir, f"rag_output_{qa_model}_multimodal_rag.json")
     output_df = process_dataframe(df, summaries_pipeline, output_file)
     return output_df
 

@@ -519,8 +519,11 @@ class SelfMultimodalRAGChain:
                     if "generation" in value:
                         return value["generation"]
             
-            return "Tidak dapat menghasilkan jawaban. Silakan coba dengan pertanyaan lain."
+            return "Maaf, saya belum memiliki cukup informasi untuk menjawab pertanyaan ini. Anda boleh mencoba mengajukan pertanyaan lain."
             
         except Exception as e:
+            if "Recursion limit" in str(e):
+                return "Mohon maaf, saya belum memiliki informasi yang memadai untuk menjawab pertanyaan tersebut secara akurat. Silakan ajukan pertanyaan lain yang relevan dengan topik neraca nasional, mulai dari konsep, definisi, metodologi, hingga analisis. Saya akan dengan senang hati membantu Anda."
+            
             traceback.print_exc()
             return f"Error dalam memproses pertanyaan: {str(e)}"
