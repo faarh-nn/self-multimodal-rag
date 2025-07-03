@@ -44,12 +44,6 @@ class BaseEvaluator(EvaluatorInterface):
             context (str): The texts retrieved by the retrieval system
             image (str): The image retrieved by the retrieval system
         """
-        # self.model = ChatOpenAI(
-        #     model=model_type,
-        #     api_key=os.getenv("OPENAI_API_KEY"),
-        #     temperature=temperature,
-        #     max_tokens=500
-        # )
         self.model = model
         self.json_parser = JsonOutputParser(pydantic_object=EvaluationResult)
         self.boolean_parser = BooleanOutputParser()

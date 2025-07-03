@@ -23,6 +23,7 @@ class QAChain:
         self.model = ChatOpenAI(
             model=model_type,
             api_key=os.getenv("OPENAI_API_KEY"),
+            temperature=0.2,
             max_tokens=400
         )
 

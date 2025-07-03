@@ -1,9 +1,13 @@
 import os
+import sys
+import io
 import time  
 import pandas as pd
 from single_vector_store.self_rag_pipeline_summaries import SelfMultimodalRAGPipelineSummaries
 from src.rag_env import *
 
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 def write_to_df(df, user_query, reference_answer, generated_answer, context, image, user_image_filename, output_file):
     df.loc[len(df)] = [user_query, reference_answer, generated_answer, context, image, user_image_filename]

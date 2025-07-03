@@ -34,6 +34,7 @@ class TextSummarizer:
         self.model = ChatOpenAI(
             model=model_type,
             api_key=os.getenv("OPENAI_API_KEY"),
+            temperature=0.2,
             max_tokens=400
         )
             
@@ -270,6 +271,7 @@ if __name__ == "__main__":
     model = ChatOpenAI(
             model='gpt-4o-mini',
             api_key=OPENAI_API_KEY,
+            temperature=0.2,
             max_tokens=500
         )
     
