@@ -2,7 +2,7 @@ import os
 import uuid
 from langchain_openai import OpenAIEmbeddings
 from langchain.retrievers import MultiVectorRetriever 
-from langchain_community.vectorstores import Chroma 
+from langchain_chroma import Chroma 
 from langchain_core.documents import Document
 from langchain.storage import LocalFileStore
 from typing import List
