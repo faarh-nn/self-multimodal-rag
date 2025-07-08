@@ -28,9 +28,6 @@ PARQUET_DIR = r"data"
 INPUT_TEXT_DATA = r'data/extracted_texts.parquet' 
 INPUT_IMG_DATA = r'data/extracted_images.parquet'
 
-# directory where extracted images are stored
-# IMAGES_DIR = r'data/images'
-
 # directories containing csv files with text summaries or image summaries
 IMG_SUMMARIES_CACHE_DIR = r"data/image_summaries"
 TEXT_SUMMARIES_CACHE_DIR = r"data/text_summaries" 

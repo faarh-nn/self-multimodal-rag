@@ -36,7 +36,7 @@ class MultimodalRAGPipelineSummaries:
             model=model_type,
             api_key=OPENAI_API_KEY,
             temperature=0.2,
-            max_tokens=400 
+            max_completion_tokens=500 
         )
 
         self.text_summarizer = TextSummarizer(model_type=model_type, cache_path=TEXT_SUMMARIES_CACHE_DIR)
