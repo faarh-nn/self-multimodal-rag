@@ -111,7 +111,7 @@ class SelfMultimodalRAGChain:
             return [
                 SystemMessage(content=system_img),
                 HumanMessage(content=[
-                    {"type": "text", "text": f"User question: {inputs['question']}\n\nPlease assess if this image is relevant:"},
+                    {"type": "text", "text": f"Pertanyaan pengguna: {inputs['question']}\n\nSilakan nilai apakah gambar ini relevan dengan pertanyaan pengguna atau tidak:"},
                     {"type": "image_url", "image_url": {"url": inputs["image_url"]}}
                 ])
             ]
