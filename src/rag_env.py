@@ -10,7 +10,8 @@ MODEL_TYPE  = 'gpt-4o-mini'
 EMBEDDING_MODEL_TYPE = "text-embedding-3-small"
 
 # excel file containing questions and reference answers
-REFERENCE_QA = r"data/reference_qa.xlsx"
+# REFERENCE_QA = r"data/reference_qa.xlsx"
+REFERENCE_QA = r"data/reference_qa_for_question_with_image.xlsx"
 
 # directory containing input images from user for question answering
 USER_IMAGES_DIR = r"data/image_for_question" 

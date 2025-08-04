@@ -6,6 +6,8 @@ from langchain_openai import ChatOpenAI
 from tqdm.auto import tqdm
 from typing import List, Tuple
 from src.utils.base64_utils.base64_utils import *
+from dotenv import load_dotenv
+load_dotenv()
 from src.rag_env import INPUT_TEXT_DATA, INPUT_IMG_DATA,IMG_SUMMARIES_CACHE_DIR, TEXT_SUMMARIES_CACHE_DIR
 
 

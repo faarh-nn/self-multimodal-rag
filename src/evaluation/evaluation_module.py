@@ -3,6 +3,8 @@ import importlib
 import os
 from typing import Dict, List
 from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+load_dotenv()
 
   
 class EvaluationModule:

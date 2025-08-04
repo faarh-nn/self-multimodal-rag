@@ -6,6 +6,8 @@ from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from langchain.storage import LocalFileStore
 from typing import List
+from dotenv import load_dotenv
+load_dotenv()
 
 
 class SummaryStoreAndRetriever:

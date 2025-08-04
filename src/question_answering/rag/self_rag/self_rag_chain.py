@@ -49,7 +49,7 @@ class SelfMultimodalRAGChain:
         
         system = """Anda adalah seorang penilai yang menilai apakah generasi LLM didukung oleh atau didasarkan pada sekumpulan fakta yang diambil.
         Fakta tersebut dapat terdiri dari informasi teks saja, gambar saja, atau teks dan gambar. Periksa semua informasi yang diberikan dengan cermat.
-        Jika terdapat gambar, perhatikan konten visualnya dan nilai apakah generasi LLM tersebut berhubungan dengan apa yang ditampilkan.
+        Jika terdapat gambar, perhatikan konten visualnya dan nilai apakah generasi LLM tersebut berhubungan dengan gambar yang ditampilkan atau tidak.
         Untuk teks, periksa apakah generasi LLM tersebut selaras dengan informasi tekstual yang disediakan.
         Berikan skor biner 'yes' atau 'no'. 'Yes' berarti jawaban didasarkan pada teks dan/atau gambar yang diberikan."""
         
@@ -146,14 +146,14 @@ class SelfMultimodalRAGChain:
         self.answer_grader = answer_prompt | structured_llm_ans_grader
 
         # Question rewriter
-        system = """Anda adalah seorang penulis ulang pertanyaan yang mengubah input pertanyaan ke versi yang lebih baik dan dioptimalkan untuk proses retrieval di vectorstore. \n
+        system = """Anda adalah asisten AI  yang ahli dalam memformulasikan ulang menjadi versi yang lebih baik dan dioptimalkan untuk proses retrieval dengan vectorstore. \n
         Perhatikan input pertanyaan yang ada dan coba pahami maksud atau makna semantik yang mendasarinya."""
         re_write_prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", system),
                 (
                     "human",
-                    "Berikut adalah input pertanyaannya: \n\n {question} \n Formulasi ulang dan optimalkan pertanyaan tersebut.",
+                    "Pertanyaan: \n\n {question} \n Formulasi ulang dan optimalkan pertanyaan tersebut.",
                 ),
             ]
         )
@@ -437,8 +437,8 @@ class SelfMultimodalRAGChain:
             "type": "text",
             "text": (
                 f"{qa_prompt}\n"
-                f"Pertanyaan yang diberikan oleh pengguna: {data_dict['question']}\n\n"
-                "Text context:\n"
+                f"Pertanyaan: {data_dict['question']}\n\n"
+                "Konteks teks:\n"
                 f"{formatted_texts}"
             )
         }

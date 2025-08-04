@@ -2,6 +2,8 @@ import os
 import pandas as pd
 from typing import List
 from evaluation_module import EvaluationModule
+from dotenv import load_dotenv
+load_dotenv()
 
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -122,9 +124,9 @@ if __name__ == "__main__":
     evaluator_model = "gpt-4o-mini"   # choose among llava and gpt4_vision
 
     # json file containing the results of a rag pipeline
-    rag_output_file = rf"data/rag_outputs/rag_output_{generator_model}_self_multimodal_rag.json" # perlu diubah ke file yang sesuai
+    rag_output_file = rf"data/rag_outputs/rag_output_{generator_model}_baseline.json" # perlu diubah ke file yang sesuai
     # file for saving evaluaton results
-    evaluation_output_file = rf"data/rag_evaluation_results/evaluation_{evaluator_model}_evaluator_self_multimodal_rag.json"
+    evaluation_output_file = rf"data/rag_evaluation_results/evaluation_{evaluator_model}_evaluator_baseline.json"
 
     evaluator = EvaluationModule(evaluator_model)
 

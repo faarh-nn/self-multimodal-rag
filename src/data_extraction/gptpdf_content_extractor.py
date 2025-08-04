@@ -8,6 +8,8 @@ import pandas as pd
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from tqdm import tqdm
 import glob
+from dotenv import load_dotenv
+load_dotenv()
 
 
 def get_pdf_page_count(pdf_path):

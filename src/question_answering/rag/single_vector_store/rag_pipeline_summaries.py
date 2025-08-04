@@ -5,8 +5,11 @@ from typing import List, Tuple, Optional
 from src.data_summarization.context_summarization import ImageSummarizer, TextSummarizer
 from src.data_summarization.user_image_summarization import UserImageSummarizer
 from langchain_openai import ChatOpenAI
+from langchain_core.messages import SystemMessage, HumanMessage
 from src.question_answering.rag.single_vector_store.rag_chain import MultimodalRAGChain
 from src.question_answering.rag.single_vector_store.retrieval import SummaryStoreAndRetriever
+from dotenv import load_dotenv
+load_dotenv()
 from src.rag_env import EMBEDDING_MODEL_TYPE, IMG_SUMMARIES_CACHE_DIR, INPUT_TEXT_DATA, INPUT_IMG_DATA, MODEL_TYPE, TEXT_SUMMARIES_CACHE_DIR, VECTORSTORE_PATH_SUMMARIES_SINGLE, USER_IMAGES_DIR
 
 
@@ -136,15 +139,40 @@ class MultimodalRAGPipelineSummaries:
         """
         if not image_filename:
             return question
+        
+        reformulation_prompt_with_image = """
+        Anda adalah asisten ahli yang ditugaskan khusus untuk mereformulasikan pertanyaan. Anda akan menerima informasi ringkasan dari sebuah gambar beserta pertanyaan yang berkaitan dengan informasi ringkasan gambar tersebut. Tugas Anda adalah menyusun ulang pertanyaan tersebut menjadi pertanyaan mandiri yang mengambil konteks dari ringkasan gambar yang diberikan dan dapat dipahami secara penuh        
+
+        ### Contoh:
+        **Pertanyaan:** Gambar yang dilampirkan merepresentasikan perekonomian berapa sektor? 
+
+        **Informasi dari ringkasan gambar:**
+        Gambar ini menunjukkan hubungan antara dua entitas: Rumah Tangga dan Perusahaan. 
+        1. Arah Panah dan Label:
+        - Panah dari Perusahaan ke Rumah Tangga (dilabeli 1) menunjukkan aliran pendapatan dari perusahaan ke rumah tangga, dalam bentuk gaji, upah, bunga, sewa, dan dividen.
+        - Panah dari Rumah Tangga ke Perusahaan (dilabeli 2) menunjukkan aliran sumber daya atau input dari rumah tangga ke perusahaan.
+        2. Konsep Ekonomi: 
+        - Gambar ini mengilustrasikan interaksi dalam ekonomi antara konsumsi rumah tangga dan produksi perusahaan. 
+        Secara keseluruhan, gambar menggambarkan siklus aliran pendapatan dan sumber daya antara rumah tangga dan perusahaan.
+
+        **Pertanyaan hasil reformulasi:**
+        Interaksi antara rumah tangga dan perusahaan dalam ekonomi merepresentasikan perekonomian berapa sektor?
+        
+        Format output: berikan pertanyaan reformulasi sebagai string langsung
+        """
             
         image_summary = self.summarize_user_image(image_filename)
         
         if image_summary:
-            enhanced_query = f"""Pertanyaan: {question}\n
-            Informasi gambar yang disertakan: {image_summary}\n\n
-            Berdasarkan pertanyaan dan konteks gambar di atas, berikan jawaban yang komprehensif."""
+            messages = [
+                        SystemMessage(content=reformulation_prompt_with_image),
+                        HumanMessage(content=f"Pertanyaan: {question}\n\nInformasi dari ringkasan gambar: {image_summary}\n\nReformulasikan pertanyaan tersebut.")
+                    ]
             
-            print(f"Enhanced query created with image context from: {image_filename}")
+            response = self.model.invoke(messages)
+            enhanced_query = response.content
+            
+            print(f"Hasil formulasi query: {enhanced_query}")
             return enhanced_query
         else:
             print(f"Failed to enhance query with image: {image_filename}. Using original question.")

@@ -3,6 +3,8 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import ChatOpenAI
 from src.utils.base64_utils.base64_utils import encode_image_from_bytes
+from dotenv import load_dotenv
+load_dotenv()
 
 
 class QAChain:
